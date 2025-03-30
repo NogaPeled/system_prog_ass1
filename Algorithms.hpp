@@ -6,13 +6,15 @@ namespace graph {
     class Algorithms 
     { 
         public:
-        Algorithms() = delete; // Prevents creation of objects **************************************
+        Algorithms() = delete; // ************************Prevents creation of objects **************************************
 
         // BFS algorithm : Returns a tree which is rooted at start_index, as a new graph
         static Graph bfs(const Graph& g, int start_vertex);
 
         // DFS algorithm : Returns a DFS tree or forest as a new graph
         static Graph dfs(const Graph& g, int start_vertex);
+
+        static void dfsVisit(const Graph& g, int current_vertex, VertexState* vertex_state, Graph& dfs_tree); // Helper method for dfs
 
         // Dijkstra's algorithm : returns a shortest path tree from start_vertex as a new graph
         static Graph dijkstra(const Graph& g, int start_vertex);
