@@ -94,4 +94,10 @@ void graph::Algorithms::dfsVisit(const Graph& g, int current_vertex, VertexState
     }
 
     vertex_state[current_vertex] = VertexState::Finished; 
+
+}
+
+graph::Graph graph::Algorithms::dijkstra(const Graph& g, int start_vertex)
+{
+    
 }
