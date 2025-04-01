@@ -99,5 +99,42 @@ void graph::Algorithms::dfsVisit(const Graph& g, int current_vertex, VertexState
 
 graph::Graph graph::Algorithms::dijkstra(const Graph& g, int start_vertex)
 {
+    int num_vertices = g.getNumOfVertices();
+    Graph spanning_tree(num_vertices); // The spanning tree to be returned
+    Queue queue(num_vertices);
+    bool* visited;
+
+    try
+    {
+        visited = new bool[num_vertices]{false};
+    }
+    catch(const std::bad_alloc e)
+    {
+        std::cerr << "Array allocation failed." << e.what() << std::endl;
+    }
+
+    for (int i = 0; i < num_vertices; i++)
+    {
+        queue.enqueue(i);
+    }
+
+    while (!queue.isEmpty())
+    {
+        int current_vertex = queue.peek();
+        int min_weight = 2^31;
+        for (Edge* edge = g.getAdjList()[current_vertex]; edge != nullptr; edge = edge->next)
+        {
+            if(edge->weight < min_weight)
+            {
+                min_weight = edge->weight;
+            }
+            spanning_tree.addDirectedEdge()
+
+        }
+
+    }
     
+    
+
+
 }

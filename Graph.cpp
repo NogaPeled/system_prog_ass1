@@ -52,7 +52,7 @@ void graph::Graph::addEdge(int src_vertex, int dest_vertex, int weight = 1)
 
 void graph::Graph::addDirectedEdge(int src_vertex, int dest_vertex, int weight = 1)
 {
-    if (src_vertex < 0 || src_vertex > num_of_vertices || dest_vertex < 0 || dest_vertex > num_of_vertices)
+    if (src_vertex < 0 || src_vertex > num_of_vertices - 1 || dest_vertex < 0 || dest_vertex > num_of_vertices - 1)
     {
         throw std::out_of_range("Invalid vertex index.");
     }
