@@ -1,3 +1,6 @@
+# Noga Peled
+# nogapeled19@gmail.com
+
 # Compiler and flags
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic -g
@@ -8,7 +11,7 @@ OBJS = $(SRCS:.cpp=.o)
 
 # Executables
 MAIN_EXEC = Main
-TEST_EXEC = test
+TEST_EXEC = tests
 
 # Default target
 all: $(MAIN_EXEC)
@@ -21,6 +24,10 @@ $(MAIN_EXEC): $(OBJS) Main.cpp
 $(TEST_EXEC): $(OBJS) tests.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
+# Run main executable
+main: $(MAIN_EXEC)
+	./$(MAIN_EXEC)
+
 # Run tests
 test: $(TEST_EXEC)
 	./$(TEST_EXEC)
@@ -31,4 +38,10 @@ valgrind: $(TEST_EXEC)
 
 # Clean
 clean:
-	rm -f *.o $(MAIN_EXEC) $(TEST_EXEC)
+	rm -f *.o *.d $(MAIN_EXEC) $(TEST_EXEC)
+
+# Automatic header file dependencies
+-include $(SRCS:.cpp=.d)
+
+%.d: %.cpp
+	$(CXX) -MM $(CXXFLAGS) $< > $@

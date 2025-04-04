@@ -1,14 +1,22 @@
+// Noga Peled
+// nogapeled19@gmail.com
+
 #include "Algorithms.hpp"
 #include "Graph.hpp"
 #include "Queue.hpp"
 #include <stdexcept> // For exceptions
-#include "MinHeap.hpp"
 #include <climits>
 #include "UnionFind.hpp"
 
 graph::Graph graph::Algorithms::bfs(const Graph& g, int start_vertex)
 {
     int num_vertices = g.getNumOfVertices();
+
+    if (start_vertex < 0 || start_vertex >= num_vertices) // Bounds check
+    {
+        throw std::out_of_range("Invalid start vertex");
+    }
+
     Graph rooted_tree(num_vertices); // The rooted tree to be returned drom the BFS traverse
     bool* visited = new bool[num_vertices]{false};
     
@@ -19,10 +27,10 @@ graph::Graph graph::Algorithms::bfs(const Graph& g, int start_vertex)
     while(!queue.isEmpty()) // Perform a breadth-first search on the graph, starting from "start_vertex"
     {
         int current = queue.dequeue();
-        std::cout << "Visited " << current << std::endl;
+        // std::cout << "Visited " << current << std::endl;
 
         for(Edge* edge = g.getAdjList()[current]; edge != nullptr; edge = edge->next) // Go over all the neighbors of "current", 
-        // And check if they are already marked as visited. If not, mark them as true and add them to the queue
+        // And check if they are already marked as visited. If not, mark them as visited (true) and add them to the queue
         {
             if (!visited[edge->dest_vertex])
             {
@@ -32,6 +40,7 @@ graph::Graph graph::Algorithms::bfs(const Graph& g, int start_vertex)
             }
         }
     }
+    
     delete[] visited;
     return rooted_tree;
 
@@ -40,6 +49,12 @@ graph::Graph graph::Algorithms::bfs(const Graph& g, int start_vertex)
 graph::Graph graph::Algorithms::dfs(const Graph& g, int start_vertex)
 {
     int num_vertices = g.getNumOfVertices();
+
+    if (start_vertex < 0 || start_vertex >= num_vertices) // Bounds check
+    {
+        throw std::out_of_range("Invalid start vertex");
+    }
+
     Graph dfs_tree(num_vertices);
     VertexState* vertex_state = new VertexState[num_vertices]; // Dynamic array to store the state of visit of each vertex of the graph : Unvisited, Visited, Finished
 
@@ -87,6 +102,11 @@ graph::Graph graph::Algorithms::dijkstra(const Graph& g, int start_vertex)
 {
     int num_vertices = g.getNumOfVertices();
 
+    if (start_vertex < 0 || start_vertex >= num_vertices) // Bounds check
+    {
+        throw std::out_of_range("Invalid start vertex");
+    }
+    
     int* dist = new int[num_vertices]{INT_MAX}; // The shortest known distance from start_vertex to vertex i
     int* parent = new int[num_vertices]{-1}; // The previous vertex on the shortest path from start_vertex to i
     bool* visited = new bool[num_vertices]{false}; // Boolean value indicating whether vertex i has been fully processed (shortest distance is known)

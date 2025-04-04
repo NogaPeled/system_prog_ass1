@@ -1,3 +1,6 @@
+// Noga Peled
+// nogapeled19@gmail.com
+
 #include "Graph.hpp"
 #include <iostream>
 #include <climits>
@@ -31,7 +34,7 @@ graph::Graph::~Graph() // Implementing a destructor for the graph
 
 }
 
-void graph::Graph::addEdge(int src_vertex, int dest_vertex, int weight = 1)
+void graph::Graph::addEdge(int src_vertex, int dest_vertex, int weight)
 {
     // Check if src_vertex, dest_vertex are within bounds
     if (src_vertex < 0 || src_vertex > num_of_vertices - 1 || dest_vertex < 0 || dest_vertex > num_of_vertices -1)
@@ -40,7 +43,7 @@ void graph::Graph::addEdge(int src_vertex, int dest_vertex, int weight = 1)
     }
     
     // The graph is undirected, so we need to create an edge from src_vertex to dest_vertex and another edge from dest_vertex to src_vertex with the same weight
-    // Create two Edge nodes (since the graph is undirected) and add each to the corresponding lists.
+    // Create two Edge ends (since the graph is undirected) and add each to the corresponding lists.
 
     Edge* src_to_dest = new Edge{dest_vertex, weight, adj_list[src_vertex]}; // Creates a new Edge node (to dest_vertex)
     // With a specific weight, and links it to the list of already existing neighbors of src_vertex
@@ -51,7 +54,7 @@ void graph::Graph::addEdge(int src_vertex, int dest_vertex, int weight = 1)
 
 }
 
-void graph::Graph::addDirectedEdge(int src_vertex, int dest_vertex, int weight = 1)
+void graph::Graph::addDirectedEdge(int src_vertex, int dest_vertex, int weight)
 {
     if (src_vertex < 0 || src_vertex > num_of_vertices - 1 || dest_vertex < 0 || dest_vertex > num_of_vertices - 1)
     {
@@ -87,7 +90,7 @@ void graph::Graph::removeEdge(int src, int dest)
     }
 
     current = &adj_list[dest]; // A pointer to a pointer to the first neighbor of dest
-    while (*current && (*current)->dest_vertex != src) // Go over src neighbors' list to find dest, while its not empty
+    while (*current && (*current)->dest_vertex != src) // Go over dest neighbors' list to find src, while its not empty
     {
         current = &((*current)->next);
     }
@@ -108,11 +111,11 @@ void graph::Graph::printGraph() const
 {
     for (int i = 0; i < num_of_vertices; i++)
     {
-        std::cout << "Vertex" << i << "->";
+        std::cout << "Vertex " << i;
         Edge* current = adj_list[i];
         while (current)
         {
-            std::cout << "[" << current->dest_vertex << ", weight = " << current->weight << "]";
+            std::cout << "->" << "[" << "Vertex " << current->dest_vertex << ", weight = " << current->weight << "]";
             current = current->next;
         }
         std::cout << std::endl;

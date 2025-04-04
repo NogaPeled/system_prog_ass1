@@ -1,3 +1,6 @@
+// Noga Peled
+// nogapeled19@gmail.com
+
 #include "Graph.hpp"
 #include "Algorithms.hpp"
 #include <iostream>

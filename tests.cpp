@@ -1,3 +1,6 @@
+// Noga Peled
+// nogapeled19@gmail.com
+
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include "Graph.hpp"
@@ -67,9 +70,9 @@ TEST_CASE("Graph printGraph output") {
     std::cout.rdbuf(old_buf);
 
     std::string output = buffer.str();
-    CHECK(output.find("Vertex0") != std::string::npos);
-    CHECK(output.find("[1, weight = 5]") != std::string::npos);
-    CHECK(output.find("[2, weight = 8]") != std::string::npos);
+    CHECK(output.find("Vertex 0") != std::string::npos);
+    CHECK(output.find("[Vertex 1, weight = 5]") != std::string::npos);
+    CHECK(output.find("[Vertex 2, weight = 8]") != std::string::npos);
 }
 
 TEST_CASE("Graph getAdjList basic check") {

@@ -1,3 +1,6 @@
+// Noga Peled
+// nogapeled19@gmail.com
+
 #pragma once
 #include "Graph.hpp"
 
@@ -17,9 +20,9 @@ namespace graph {
         /**
          * @brief Performs Breadth-First Search (BFS) starting from a given vertex.
          * 
-         * @param g The input graph (undirected or directed).
+         * @param g The input graph (undirected).
          * @param start_vertex The vertex to begin the BFS traversal from.
-         * @return A rooted tree as a directed graph representing the BFS traversal.
+         * @return A rooted tree as a directed graph representing the BFS traversal rooted at start_vertex.
          */
 
         static Graph bfs(const Graph& g, int start_vertex);
@@ -44,15 +47,13 @@ namespace graph {
          * @param g The input graph.
          * @param current_vertex The vertex currently being visited.
          * @param vertex_state An array of states (Unvisited, Visited, Finished).
-         * @param dfs_tree The tree being constructed during DFS.
+         * @param dfs_tree The tree/forest being constructed during DFS.
          */
 
         static void dfsVisit(const Graph& g, int current_vertex, VertexState* vertex_state, Graph& dfs_tree); 
 
         /**
          * @brief Computes the shortest path tree from a start vertex using Dijkstra's algorithm.
-         * 
-         * Assumes non-negative edge weights.
          * 
          * @param g The input graph.
          * @param start_vertex The source vertex.

@@ -1,3 +1,6 @@
+// Noga Peled
+// nogapeled19@gmail.com
+
 #include "Queue.hpp"
 #include <iostream>
 #include <stdexcept>
