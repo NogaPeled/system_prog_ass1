@@ -1,5 +1,6 @@
 #include "Graph.hpp"
 #include <iostream>
+#include <climits>
 
 graph::Graph::Graph(int vertices) // Implementing a constructor for the graph
 {
@@ -121,10 +122,30 @@ void graph::Graph::printGraph() const
 
 int graph::Graph::getNumOfVertices() const
 {
-    return num_of_vertices;
+    return this->num_of_vertices;
 }
 
 graph::Edge** graph::Graph::getAdjList() const
 {
-    return adj_list;
+    return this->adj_list;
+}
+
+int graph::Graph::getWeight(int src, int dest) const
+{
+    if (src < 0 || src >= num_of_vertices || dest < 0 || dest >= num_of_vertices)
+    {
+        throw std::out_of_range("Invalid vertex. ");
+    }
+    
+    for (Edge* current = adj_list[src]; current != nullptr; current = current->next)
+    {
+        if (current->dest_vertex == dest)
+        {
+            return current->weight;
+        }
+        
+    }
+
+    return INT_MAX; // The edge doesnt exist, return infinity
+    
 }

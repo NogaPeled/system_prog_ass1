@@ -2,25 +2,18 @@
 #include <iostream>
 #include <stdexcept>
 
-Queue::Queue(int size) : capacity(0), front(0), rear(-1), count(0) {
+// Constructor: initializes a queue with given capacity
+Queue::Queue(int size) : capacity(size), front(0), rear(-1), count(0) {
 
-    try
-    {
-        array = new int[capacity];
-    }
-    catch(const std::bad_alloc& e)
-    {
-        std::cerr << "Failed to allocate memory for the queue : " << e.what() << std::endl;
-    }
-    
+    array = new int[capacity];
 }
 
-Queue::~Queue()
+Queue::~Queue() // Destructor: frees the allocated array
 {
     delete[] array;
 }
 
-void Queue::enqueue(int item)
+void Queue::enqueue(int item) // Adds an item to the rear of the queue
 {
     if (isFull())
     {
@@ -32,7 +25,7 @@ void Queue::enqueue(int item)
     
 }
 
-int Queue::dequeue()
+int Queue::dequeue() // Removes and returns the front item of the queue
 {
     if (isEmpty())
     {
@@ -46,7 +39,7 @@ int Queue::dequeue()
     
 }
 
-int Queue::peek() const
+int Queue::peek() const // Returns the front item without removing it
 {
     if (isEmpty())
     {
@@ -56,17 +49,17 @@ int Queue::peek() const
 
 }
 
-bool Queue::isFull() const
+bool Queue::isFull() const // Returns true if the queue is full
 {
     return count == capacity;
 }
 
-bool Queue::isEmpty() const
+bool Queue::isEmpty() const // Returns true if the queue is empty
 {
     return count == 0;
 }
 
-int Queue::size() const
+int Queue::cap() const // Returns the total capacity of the queue
 {
     return capacity;
 }
