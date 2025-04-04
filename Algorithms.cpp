@@ -107,9 +107,17 @@ graph::Graph graph::Algorithms::dijkstra(const Graph& g, int start_vertex)
         throw std::out_of_range("Invalid start vertex");
     }
     
-    int* dist = new int[num_vertices]{INT_MAX}; // The shortest known distance from start_vertex to vertex i
-    int* parent = new int[num_vertices]{-1}; // The previous vertex on the shortest path from start_vertex to i
-    bool* visited = new bool[num_vertices]{false}; // Boolean value indicating whether vertex i has been fully processed (shortest distance is known)
+    int* dist = new int[num_vertices]; // The shortest known distance from start_vertex to vertex i
+    int* parent = new int[num_vertices]; // The previous vertex on the shortest path from start_vertex to i
+    bool* visited = new bool[num_vertices]; // Boolean value indicating whether vertex i has been fully processed (shortest distance is known)
+
+    // Initialize distances to INT_MAX and parent indices to -1
+    for (int i = 0; i < num_vertices; i++) {
+
+        dist[i] = INT_MAX;
+        parent[i] = -1;
+        visited[i] = false;
+    }
 
     dist[start_vertex] = 0; // Distance from start_vertex to itself    
 
@@ -143,7 +151,6 @@ graph::Graph graph::Algorithms::dijkstra(const Graph& g, int start_vertex)
             {
                 dist[neighbor] = dist[current] + e->weight;
                 parent[neighbor] = current; // Update the parent to reconstruct the path later
-
             }
         }
     }
@@ -171,9 +178,16 @@ graph::Graph graph::Algorithms::prim(const Graph& g)
 {
     int num_vertices = g.getNumOfVertices(); 
     
-    int* key = new int[num_vertices]{INT_MAX}; // The minumum weight edge that connects vertex i to the MST
-    int* parent = new int[num_vertices]{-1}; // The parent of vertex i in the MST
-    bool* inMST = new bool[num_vertices]{false}; // Boolean flag- is vertex i already included in the MST?
+    int* key = new int[num_vertices]; // The minumum weight edge that connects vertex i to the MST
+    int* parent = new int[num_vertices]; // The parent of vertex i in the MST
+    bool* inMST = new bool[num_vertices]; // Boolean flag- is vertex i already included in the MST?
+
+     // Initialize key values to INT_MAX, parent to -1, and inMST to false
+    for (int i = 0; i < num_vertices; i++) {
+        key[i] = INT_MAX;
+        parent[i] = -1;
+        inMST[i] = false;
+    }
 
     key[0] = 0; // Start from vertex 0;
     
