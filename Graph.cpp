@@ -42,16 +42,47 @@ void graph::Graph::addEdge(int src_vertex, int dest_vertex, int weight)
         throw std::out_of_range("Invalid vertex index.");
     }
     
+    bool updated_src = false;
+    bool updated_dest = false;
+
+    // Check if edge from src to dest exists
+    for (Edge* curr = adj_list[src_vertex]; curr != nullptr; curr = curr->next)
+    {
+        if (curr->dest_vertex == dest_vertex)
+        {
+            curr->weight = weight;
+            updated_src = true;
+            break;
+        }
+    }
+
+    // Check if edge from dest to src exists
+    for (Edge* curr = adj_list[dest_vertex]; curr != nullptr; curr = curr->next)
+    {
+        if (curr->dest_vertex == src_vertex)
+        {
+            curr->weight = weight;
+            updated_dest = true;
+            break;
+        }
+    }
+
     // The graph is undirected, so we need to create an edge from src_vertex to dest_vertex and another edge from dest_vertex to src_vertex with the same weight
     // Create two Edge ends (since the graph is undirected) and add each to the corresponding lists.
 
-    Edge* src_to_dest = new Edge{dest_vertex, weight, adj_list[src_vertex]}; // Creates a new Edge node (to dest_vertex)
-    // With a specific weight, and links it to the list of already existing neighbors of src_vertex
-    adj_list[src_vertex] = src_to_dest; // Makes the new_edge the first neighbor in the list, concatenating the previous neighbors
+    // If not found, add new edge from src to dest
+    if (!updated_src)
+    {
+        Edge* src_to_dest = new Edge{dest_vertex, weight, adj_list[src_vertex]};
+        adj_list[src_vertex] = src_to_dest;
+    }
 
-    Edge* dest_to_src = new Edge{src_vertex, weight, adj_list[dest_vertex]}; // The opposite edge- from dest_vertex to src_vertex 
-    adj_list[dest_vertex] = dest_to_src;
-
+    // If not found, add new edge from dest to src
+    if (!updated_dest)
+    {
+        Edge* dest_to_src = new Edge{src_vertex, weight, adj_list[dest_vertex]};
+        adj_list[dest_vertex] = dest_to_src;
+    }
 }
 
 void graph::Graph::addDirectedEdge(int src_vertex, int dest_vertex, int weight)
@@ -60,6 +91,17 @@ void graph::Graph::addDirectedEdge(int src_vertex, int dest_vertex, int weight)
     {
         throw std::out_of_range("Invalid vertex index.");
     }
+
+    // Check if the edge already exists
+    for (Edge* curr = adj_list[src_vertex]; curr != nullptr; curr = curr->next)
+    {
+        if (curr->dest_vertex == dest_vertex)
+        {
+            curr->weight = weight; // Update weight if edge exists
+            return;
+        }
+    }
+
     Edge* src_to_dest = new Edge{dest_vertex, weight, adj_list[src_vertex]};
     adj_list[src_vertex] = src_to_dest;
     
