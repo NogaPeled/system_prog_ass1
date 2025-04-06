@@ -41,9 +41,9 @@ The implementation avoids use of the C++ STL (e.g., no `vector`, `queue`, `map`,
 
 ## Build & Run
 
-### Compile the main demo:
+### Run the main demo:
 ```bash
-make main
+Make main
 ```
 
 ### Run the demo:

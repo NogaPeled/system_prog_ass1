@@ -10,7 +10,7 @@ SRCS = Graph.cpp Algorithms.cpp Queue.cpp UnionFind.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # Executables
-MAIN_EXEC = Main
+MAIN_EXEC = main
 TEST_EXEC = tests
 
 # Default target
@@ -25,7 +25,7 @@ $(TEST_EXEC): $(OBJS) tests.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 # Run main executable
-main: $(MAIN_EXEC)
+Main: $(MAIN_EXEC)
 	./$(MAIN_EXEC)
 
 # Run tests

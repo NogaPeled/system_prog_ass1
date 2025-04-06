@@ -36,7 +36,7 @@ graph::Graph graph::Algorithms::bfs(const Graph& g, int start_vertex)
             {
                 visited[edge->dest_vertex] = true;
                 queue.enqueue(edge->dest_vertex);
-                rooted_tree.addDirectedEdge(current, edge->dest_vertex); // Add a new directed edge to the rooted tree
+                rooted_tree.addDirectedEdge(current, edge->dest_vertex, edge->weight); // Add a new directed edge to the rooted tree
             }
         }
     }
@@ -88,7 +88,7 @@ void graph::Algorithms::dfsVisit(const Graph& g, int current_vertex, VertexState
         int neighbor = edge->dest_vertex;
         if (vertex_state[neighbor] == VertexState::Unvisited) // If a neighbor is unvisited' it's a tree-edge and we add it to the dfs_tree
         {
-            dfs_tree.addDirectedEdge(current_vertex, edge->dest_vertex);  
+            dfs_tree.addDirectedEdge(current_vertex, edge->dest_vertex, edge->weight);  
             dfsVisit(g, neighbor, vertex_state, dfs_tree); // Recursively go over the current vertex' neighbors
         }
         
