@@ -46,11 +46,6 @@ The implementation avoids use of the C++ STL (e.g., no `vector`, `queue`, `map`,
 make Main
 ```
 
-### Run the demo:
-```bash
-./Main
-```
-
 ### Run unit tests:
 ```bash
 make test
