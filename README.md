@@ -43,7 +43,7 @@ The implementation avoids use of the C++ STL (e.g., no `vector`, `queue`, `map`,
 
 ### Run the main demo:
 ```bash
-Make main
+make Main
 ```
 
 ### Run the demo:
